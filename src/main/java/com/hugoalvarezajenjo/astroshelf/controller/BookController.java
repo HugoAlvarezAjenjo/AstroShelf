@@ -47,6 +47,10 @@ public class BookController {
     @PostMapping("/edit/{id}")
     public String updateBook(@PathVariable Long id, @ModelAttribute final Book book) {
         book.setId(id);
+        if (book.getPublishedDate() == null) {
+            final Optional<Book> originalBook = this.bookService.getBookById(id);
+            originalBook.ifPresent(value -> book.setPublishedDate(value.getPublishedDate()));
+        }
         this.bookService.saveBook(book);
         return "redirect:/books";
     }

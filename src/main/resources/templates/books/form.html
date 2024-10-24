@@ -47,7 +47,8 @@
 
         <div class="mb-3">
             <label for="publishedDate" class="form-label">Fecha de Publicación</label>
-            <input type="date" id="publishedDate" th:field="*{publishedDate}" class="form-control" required/>
+            <input type="date" id="publishedDate" th:field="*{publishedDate}" class="form-control"
+                   th:attr="required=${book.id == null}"/>
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
