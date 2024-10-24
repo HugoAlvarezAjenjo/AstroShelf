@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <title th:text="'Detalles de ' + ${book.title}"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 th:text="'Detalles de ' + ${book.title}"></h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${book.title}"></h5>
+            <h6 class="card-subtitle mb-2 text-muted" th:text="'Autor: ' + ${book.author}"></h6>
+            <p class="card-text"><strong>Categoría:</strong> <span th:text="${book.category}"></span></p>
+            <p class="card-text"><strong>ISBN:</strong> <span th:text="${book.isbn}"></span></p>
+            <p class="card-text"><strong>Descripción:</strong> <span th:text="${book.description}"></span></p>
+            <p class="card-text"><strong>Editorial:</strong> <span th:text="${book.publisher}"></span></p>
+            <p class="card-text"><strong>Fecha de Publicación:</strong> <span th:text="${book.publishedDate.format(T(java.time.format.DateTimeFormatter).ofPattern('dd/MM/yyyy'))}"></span></p>
+
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a class="btn btn-secondary" th:href="@{/books}">Volver a la lista</a>
+        <a class="btn btn-warning" th:href="@{/books/edit/{id}(id=${book.id})}">Editar</a>
+        <a class="btn btn-danger" th:href="@{/books/delete/{id}(id=${book.id})}"
+           onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
