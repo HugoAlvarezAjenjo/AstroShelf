@@ -44,9 +44,28 @@ public class BookController {
         }
     }
 
+    @PostMapping("/edit/{id}")
+    public String updateBook(@PathVariable Long id, @ModelAttribute final Book book) {
+        book.setId(id);
+        this.bookService.saveBook(book);
+        return "redirect:/books";
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable final Long id) {
         this.bookService.deleteBookById(id);
         return "redirect:/books";
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewBook(@PathVariable final Long id, final Model model) {
+        Optional<Book> book = this.bookService.getBookById(id);
+        if (book.isPresent()) {
+            System.out.printf("Libro" + book.get());
+            model.addAttribute("book", book.get());
+            return "books/view";
+        } else {
+            return "books/list";
+        }
     }
 }
