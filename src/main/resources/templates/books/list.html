@@ -30,6 +30,7 @@
             <td th:text="${book.author}">Autor</td>
             <td th:text="${book.isbn}">ISBN</td>
             <td>
+                <a class="btn btn-info" th:href="@{/books/view/{id}(id=${book.id})}">Ver Detalles</a>
                 <a class="btn btn-warning" th:href="@{/books/edit/{id}(id=${book.id})}">Editar</a>
                 <a class="btn btn-danger" th:href="@{/books/delete/{id}(id=${book.id})}"
                    onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</a>
