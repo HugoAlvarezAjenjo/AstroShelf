@@ -2,7 +2,6 @@ package com.hugoalvarezajenjo.astroshelf.service;
 
 import com.hugoalvarezajenjo.astroshelf.model.User;
 import com.hugoalvarezajenjo.astroshelf.repository.UserRepository;
-import com.hugoalvarezajenjo.astroshelf.types.Role;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         final User user = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
-        System.out.println(user);
-        System.out.println(Role.LIBRARIAN.toString());
         return org.springframework.security.core.userdetails.User.withUsername(user.getUsername())
                 .password(user.getPassword())
                 .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name())))

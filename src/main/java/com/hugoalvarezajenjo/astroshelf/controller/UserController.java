@@ -4,6 +4,8 @@ import com.hugoalvarezajenjo.astroshelf.model.User;
 import com.hugoalvarezajenjo.astroshelf.service.UserService;
 import com.hugoalvarezajenjo.astroshelf.types.Role;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,16 @@ public class UserController {
     @GetMapping("/login")
     public String showLoginForm(final Model model) {
         return "user/login";
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(final Model model) {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        final String username = authentication.getName();
+        this.userService.findUserByUsername(username).ifPresent(user -> {
+            model.addAttribute("user", user);
+        });
+        return "user/profile";
     }
 
 }
