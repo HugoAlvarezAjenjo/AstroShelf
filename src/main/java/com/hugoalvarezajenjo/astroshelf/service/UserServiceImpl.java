@@ -19,9 +19,4 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);
     }
-
-    @Override
-    public Optional<User> findUserByUsername(final String username) {
-        return this.userRepository.findByUsername(username);
-    }
 }

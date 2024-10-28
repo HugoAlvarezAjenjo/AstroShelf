@@ -28,4 +28,9 @@ public class UserController {
         return "user/login";
     }
 
+    @GetMapping("/login")
+    public String showLoginForm(final Model model) {
+        return "user/login";
+    }
+
 }
