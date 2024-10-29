@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findUserByUsername(final String username) {
         return this.userRepository.findByUsername(username);
     }
+
+    @Override
+    public void deleteUserById(final Long id) {
+        this.userRepository.deleteById(id);
+    }
 }
