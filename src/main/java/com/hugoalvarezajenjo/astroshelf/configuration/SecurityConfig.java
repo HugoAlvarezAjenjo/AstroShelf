@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .formLogin(form -> {
                     form.loginPage("/login").permitAll();
                     form.loginProcessingUrl("/login");
-                    form.defaultSuccessUrl("/books", true);
+                    form.defaultSuccessUrl("/profile", true);
                     form.permitAll();
                 })
                 .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF protection for the H2 console
