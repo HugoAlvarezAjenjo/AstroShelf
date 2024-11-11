@@ -32,4 +32,12 @@ public class BookServiceImpl implements BookService {
     public void deleteBookById(final Long id) {
         this.bookRepository.deleteById(id);
     }
+
+    @Override
+    public List<Book> searchBooks(String query) {
+        if (query == null || query.isBlank()) {
+            return getAllBooks();
+        }
+        return bookRepository.findByTitleContainingIgnoreCaseOrAuthorContainingIgnoreCaseOrIsbnContainingIgnoreCase(query, query, query);
+    }
 }
