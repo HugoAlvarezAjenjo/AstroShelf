@@ -21,6 +21,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> {
                     authorizeRequests.requestMatchers("/books**").hasRole(Role.LIBRARIAN.toString());
+                    authorizeRequests.requestMatchers("/loans**").hasRole(Role.LIBRARIAN.toString());
                     authorizeRequests.requestMatchers("/h2-console/**").permitAll();
                     authorizeRequests.anyRequest().permitAll();
                 })

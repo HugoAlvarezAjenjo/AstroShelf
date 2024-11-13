@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,5 +29,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(final Long id) {
         this.userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> getUserById(final Long userId) {
+        return this.userRepository.findById(userId);
     }
 }
